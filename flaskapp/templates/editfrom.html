@@ -9,23 +9,22 @@
 
 <!-- Form Name -->
 <legend>Form Name</legend>
-        
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">name</label>  
   <div class="col-md-4">
-  <input id="textinput" name="textinput" type="text" placeholder="untitled Question" class="form-control ">  
+  <input id="textinput" name="textinput" value="{{Userevent.name}}" type="text" placeholder="untitled Question" class="form-control ">  
   </div>
 </div>
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Phone Number</label>  
   <div class="col-md-4">
-  <input id="textinput1" name="textinput1" type="number" placeholder="untitled Question" class="form-control ">  
+  <input id="textinput1" name="textinput1" value="{{Userevent.phone}}" type="number" placeholder="untitled Question" class="form-control ">  
   </div>
 </div>
 <div class="form-group">
     <label class="col-md-4 control-label" for="exampleInputEmail1">Email address</label>
     <div class="col-md-4">
-    <input type="email" class="form-control" name="exampleInputEmail1" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <input type="email" class="form-control" value="{{Userevent.email}}" name="exampleInputEmail1" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
     <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
   </div>
 </div>
@@ -140,72 +139,6 @@ $(document).ready( function () {
     $("#checkbox_groub").hide()
   }
 });
-</script>
-<script type="text/javascript">
-  $("#btnSubmit").click(function(e){
-    
-    var dataset = $('#selectbasic').val()
-    var email =$('#exampleInputEmail1').val()
-    var phone_number=$('#textinput1').val()
-    function validateemail(email){
-      alert("vaild mail function is called")
-      var filter = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-      return filter.test(email);
-      
-    }
-    function vaildphonenumber(phone_number){
-      alert("vaild Phone function is called")
-      var phone = /([0-9]{10})|(\([0-9]{3}\)\s+[0-9]{3}\-[0-9]{4})/;
-      return phone.test(phone_number);
-      
-    }
-    
-    if(validateemail(email) && vaildphonenumber(phone_number))
-    {
-      if(dataset =="checkbox")
-      {
-        var fa;
-        $.each($("input[name='checkboxes']:checked"),function(){
-             fa=($(this).val());
-        });
-        $.ajax({
-              url: '/data',
-              
-              type: 'POST',
-              data: {textname:$('#textinput').val(),number:$('#textinput1').val(),email:$('#exampleInputEmail1').val(),fa:fa},
-              success: function(response) {
-                  console.log(response);
-              },
-              error: function(error) {
-                  console.log(error);
-              }
-          });
-         
-      }
-     else if(dataset =="Radio")
-      {
-        var fa;
-        $.each($("input[name='radios']:checked"),function(){
-             fa=($(this).val());
-        });
-        $.ajax({
-              url: '/data',
-              
-              type: 'POST',
-              data: {textname:$('#textinput').val(),number:$('#textinput1').val(),email:$('#exampleInputEmail1').val(),fa:fa},
-              success: function(response) {
-                  console.log(response);
-              },
-              error: function(error) {
-                  console.log(error);
-              }
-          });
-         
-      }
-    }
-  
-  });
-   
 </script>
 </body>
 </html>

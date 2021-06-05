@@ -25,7 +25,16 @@ def data():
 @auth.route('/view')
 def view():
     return render_template('view.html',Userevent = Userevent.query.all())
-@auth.route('/edit',methods=['POST'])
-def edit():
-    return render_template("index.html")
-
+@auth.route('/<id>/editfrom',methods=['GET','POST'])
+def editfrom(id):
+    print("id value")
+    print(id)
+    
+    return render_template("editfrom.html",Userevent =Userevent.query.get(id))
+@auth.route('/<id>/delfrom',methods=['GET','POST'])
+def delfrom(id):
+    user=Userevent.query.get(id)
+    db.session.delete(user)
+    db.session.commit()
+    
+    return render_template('view.html')
